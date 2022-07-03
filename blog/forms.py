@@ -17,7 +17,7 @@ class FormularioPost(forms.ModelForm):
 
 class FormularioRegistro(UserCreationForm):
     nombre = forms.CharField(max_length=50)
-    email = forms.EmailField()
+    email = forms.EmailField(widget=forms.EmailInput())
     web = forms.CharField(max_length=255)
 
     class Meta:

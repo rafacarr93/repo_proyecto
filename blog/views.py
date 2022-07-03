@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
@@ -14,20 +15,24 @@ def inicio(request):
 
     return render(request, 'home.html', {'posts': posts})
 
+
 def pages(request, id):
     post = Post.objects.get(id=id)
 
     return render(request, 'pages.html', {'post':post})
+
 
 class Subir_post(CreateView):
     model = Post
     form_class = FormularioPost
     template_name = 'subir_post.html'
 
+
 class Editar_post(UpdateView):
     model = Post
     template_name = 'editar_post.html'
     fields = ['titulo', 'subtitulo', 'cuerpo']
+
 
 class Eliminar_post(DeleteView):
     model = Post
@@ -49,6 +54,7 @@ def usuario_login(request): #Si la llamo login puede haber un conflicto con el m
     else:
         return render(request, 'login.html')
 
+@login_required(login_url='login')
 def usuario_logout(request):
     logout(request)
     messages.success(request, 'Sesión finalizada')

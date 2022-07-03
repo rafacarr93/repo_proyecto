@@ -2,9 +2,6 @@
 {% load static %}
 {% load i18n %}
 {% block contenido %}
-{% if form.errors %}
-    <p>Error al cargar el formulario. Intente nuevamente.</p>
-{% endif %}
 <main class="mb-4">
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
@@ -29,16 +26,7 @@
                                     </div>
                                 </div>
                             {% endfor %}
-                        {% endif %}<!--
-                        <div class="form-floating">
-                            <input class="form-control" id="name" type="text" name="nombre" placeholder="Enter your name..." required/>
-                            <label for="name">Nombre de usuario</label>
-                        </div>
-                        <div class="form-floating">
-                            <input class="form-control" type="password" name="password" placeholder="Enter your email..." required/>
-                            <label>Contraseña</label>
-                        </div>
-                        <br />-->
+                        {% endif %}
                         <!-- Submit Button-->
                         <button class="btn btn-light" id="submitButton" type="submit">Registrarse</button>
                     </form>
