@@ -11,7 +11,7 @@ class Post(models.Model):
     cuerpo = models.TextField()
     autor = models.ForeignKey(User, on_delete=models.CASCADE)
     fecha = models.DateTimeField(default=datetime.now)
-    #imagen = models.ImageField(upload_to='imgs_posts')
+    imagen = models.ImageField(upload_to='imgs_posts', null=True, blank=True, default ='default.png')
 
     def __str__(self):
         return self.titulo + ' - ' + str(self.autor)

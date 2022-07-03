@@ -6,13 +6,14 @@ from .models import Post
 class FormularioPost(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('titulo', 'subtitulo', 'cuerpo', 'autor')
+        fields = ('titulo', 'subtitulo', 'cuerpo','imagen','autor')
 
     widgets = {
         'titulo': forms.TextInput(attrs={'class': 'form-control'}),
         'subtitulo': forms.TextInput(attrs={'class': 'form-control'}),
         'cuerpo': forms.Textarea(attrs={'class': 'form-control'}),
-        'autor': forms.Textarea(attrs={'class': 'form-control'})
+        'imagen': forms.ImageField(),
+        'autor': forms.Textarea(attrs={'class': 'form-control'}),
     }
 
 class FormularioRegistro(UserCreationForm):

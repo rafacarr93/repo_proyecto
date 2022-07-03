@@ -9,7 +9,7 @@
                 <h1>Subir post</h1>
                 <div class="my-5">
                     <div class="form-floating">
-                        <form action="" method="POST">
+                        <form action="" method="POST" enctype="multipart/form-data">
                             {% csrf_token %}
                             {{form.as_p}}
                             <br />
