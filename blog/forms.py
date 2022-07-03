@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 from .models import Post
 
@@ -23,4 +23,12 @@ class FormularioRegistro(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'nombre', 'email', 'web', 'password1', 'password2')
-    pass
+
+class FormularioEditarUsuario(UserChangeForm):
+    nombre = forms.CharField(max_length=50)
+    email = forms.EmailField(widget=forms.EmailInput())
+    web = forms.CharField(max_length=255)
+
+    class Meta:
+        model = User
+        fields = ('username', 'nombre', 'email', 'web', 'password')

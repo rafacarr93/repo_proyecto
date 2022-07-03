@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
+from django.views import generic
+from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
+from django.contrib.auth.views import PasswordChangeView
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Post
-from .forms import FormularioPost, FormularioRegistro
+from .forms import FormularioPost, FormularioRegistro, FormularioEditarUsuario
 
 # Create your views here.
 
@@ -54,7 +55,6 @@ def usuario_login(request): #Si la llamo login puede haber un conflicto con el m
     else:
         return render(request, 'login.html')
 
-@login_required(login_url='login')
 def usuario_logout(request):
     logout(request)
     messages.success(request, 'Sesión finalizada')
@@ -75,3 +75,15 @@ def registro(request):
         mi_formulario = FormularioRegistro()
 
     return render(request, 'registro.html', {'formulario': mi_formulario})
+
+class Editar_usuario(generic.UpdateView):
+    form_class = FormularioEditarUsuario
+    template_name = 'editar_perfil.html'
+    success_url = reverse_lazy('inicio')
+
+    def get_object(self):
+        return self.request.user
+
+class Cambiar_password(PasswordChangeView):
+    form_class = PasswordChangeForm
+    success_url = reverse_lazy('inicio')
