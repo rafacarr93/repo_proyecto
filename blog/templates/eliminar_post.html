@@ -1,0 +1,30 @@
+{% extends 'padre.html' %}
+{% load static %}
+{% block contenido %}
+<main class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <h4>¿Eliminar "{{post.titulo}}"?</h4>
+                <div class="my-5">
+                    <div class="form-floating">
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            <div class="alert alert-danger d-flex align-items-center" role="alert">
+                                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                <div>
+                                  ¿Está seguro?
+                                </div>
+                              </div>
+                            <br />
+                            <!-- Submit Button-->
+                            <button class="btn btn-light" id="submitButton" type="submit">Borrar post</button>
+                            <a href="{% url 'inicio' %}"><button class="btn btn-light" id="submitButton">Cancelar</button></a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

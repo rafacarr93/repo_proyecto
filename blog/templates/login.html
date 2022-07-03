@@ -1,0 +1,29 @@
+{% extends 'padre.html' %}
+{% load static %}
+{% block contenido %}
+<main class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <h1>Iniciar sesión</h1>
+                <div class="my-5">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <div class="form-floating">
+                            <input class="form-control" id="name" type="text" name="nombre" placeholder="Enter your name..." required/>
+                            <label for="name">Nombre de usuario</label>
+                        </div>
+                        <div class="form-floating">
+                            <input class="form-control" type="password" name="password" placeholder="Enter your email..." required/>
+                            <label>Contraseña</label>
+                        </div>
+                        <br />
+                        <!-- Submit Button-->
+                        <button class="btn btn-light" id="submitButton" type="submit">Ingresar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

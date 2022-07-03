@@ -1,0 +1,69 @@
+{% extends 'padre.html' %}
+{% load static %}
+{% load i18n %}
+{% block contenido %}
+        <!-- Post Content-->
+        <div class="container position-relative px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div class="post-preview">
+                        <h1>{{post.titulo}}</h1><br>
+                        <h3 class="post-subtitle">{{post.subtitulo}}</h3>
+                        <p class="post-meta">
+                            Subido por
+                            <a href="#!">{{post.autor}}</a>
+                            el {% language 'es' %}{{post.fecha}}{% endlanguage %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <article class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <p>{{post.cuerpo}}</p>
+                        <div class="field">
+                            <a href="{% url 'editar_post' post.pk %}"><button class="btn btn-light small">Editar</button></a>
+                            <a href="{% url 'eliminar_post' post.pk %}"><button class="btn btn-light small">Eliminar</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <br>
+        <div class="container position-relative px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <h4 class="subtitle">Comentarios</h4>
+                    {% for comentario in post.comentarios.all %}
+                    <article class="media">
+                        <div class="media-content">
+                            <div class="content">
+                                <p>
+                                    <strong>{{comentario.nombre}}</strong> <small>{% language 'es' %}{{post.fecha}}{% endlanguage %}</small>
+                                    <br>
+                                    {{comentario.cuerpo}}
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+                    {% empty %}
+                    <div class="notification">
+                        <p class="text-secondary small">Sin comentarios</p>
+                    </div>
+                    {% endfor %}
+                    <hr>
+                    <h4 class="subtitle">Agregar comentario</h4>
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        {{formulario.as_p}}
+                        <div class="field">
+                            <button class="btn btn-light small">Enviar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    <br>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'padre.html' %}
+{% load static %}
+{% load i18n %}
+{% block contenido %}
+<!-- Main Content-->
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            <!-- Post preview-->
+            {% for post in posts %}
+            <div class="post-preview">
+                <a href="post.html">
+                    <h2 class="post-title">{{post.titulo}}</h2>
+                    <h3 class="post-subtitle">{{post.subtitulo}}</h3>
+                </a>
+                <p class="post-meta">
+                    Subido por
+                    <a href="#!">{{post.autor}}</a>
+                    el {% language 'es' %}{{post.fecha}}{% endlanguage %}
+                </p>
+                <button class="btn btn-light"><a href="{% url 'pages' post.id %}">Ver más</a></button>
+            </div>
+            <!-- Divider-->
+            <hr class="my-4" />
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
