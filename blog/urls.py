@@ -12,5 +12,6 @@ urlpatterns = [
     path('login', views.usuario_login, name='login'),
     path('logout', views.usuario_logout, name='logout'),
     path('registro', views.registro, name='registro'),
-    path('pages/<int:pk>/comentar', views.Agregar_comentario.as_view(), name='comentar')
+    path('pages/<int:pk>/comentar', views.Agregar_comentario.as_view(), name='comentar'),
+    path('about', views.about, name='about')
 ]

@@ -13,8 +13,9 @@ from .forms import FormularioPost, FormularioRegistro, FormularioEditarUsuario, 
 
 def inicio(request):
     posts = Post.objects.all()
+    cant_posts = len(posts)
 
-    return render(request, 'home.html', {'posts': posts})
+    return render(request, 'home.html', {'posts': posts, 'cant_posts': cant_posts})
 
 
 def pages(request, id):
@@ -97,3 +98,6 @@ class Agregar_comentario(CreateView):
         return super().form_valid(form)
 
     success_url = reverse_lazy('inicio')
+
+def about(request):
+    return render(request, 'about.html')

@@ -1,2 +1,19 @@
 {% extends 'padre.html' %}
 {% load static %}
+{% block contenido %}
+<article class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <h1 style="text-align: center;">Acerca de mí</h1>
+                <img src="{% static 'blog/assets/img/RC.jpg' %}" alt="">
+                <p>Soy Rafael Carrizo, Data analyst y estudiante de Coderhouse. Decidí asumir el desafío y por eso hago la entrega del 
+                    blog de forma individual. Obviamente tuve un montón de dificultades al hacerlo, pero con la ayuda de las clases,
+                    la documentación de Django y muchos, muchos, tutoriales de Youtube lo logré (a pesar de lo desprolijo del código).
+                    Espero que les guste!
+                </p>
+            </div>
+        </div>
+    </div>
+</article>
+{% endblock %}
