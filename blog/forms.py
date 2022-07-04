@@ -1,7 +1,8 @@
+from dataclasses import field
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
-from .models import Post
+from .models import Post, Comentario
 
 class FormularioPost(forms.ModelForm):
     class Meta:
@@ -33,3 +34,13 @@ class FormularioEditarUsuario(UserChangeForm):
     class Meta:
         model = User
         fields = ('username', 'nombre', 'email', 'web', 'password')
+
+class FormularioComentario(forms.ModelForm):
+    class Meta:
+        model = Comentario
+        fields = ('nombre', 'cuerpo')
+
+        widgets = {
+            'nombre': forms.TextInput(attrs={'class': 'form-control'}),
+            'cuerpo': forms.Textarea(attrs={'class': 'form-control'}),
+        }

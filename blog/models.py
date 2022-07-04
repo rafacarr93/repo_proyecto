@@ -11,7 +11,7 @@ class Post(models.Model):
     cuerpo = models.TextField()
     autor = models.ForeignKey(User, on_delete=models.CASCADE)
     fecha = models.DateTimeField(default=datetime.now)
-    imagen = models.ImageField(upload_to='imgs_posts', null=True, blank=True, default ='default.png')
+    imagen = models.ImageField(upload_to='imgs_posts', null=True, blank=True)
 
     def __str__(self):
         return self.titulo + ' - ' + str(self.autor)
@@ -21,3 +21,12 @@ class Post(models.Model):
 
     class Meta:
         ordering = ['-fecha']
+
+class Comentario(models.Model):
+    post = models.ForeignKey(Post, related_name='comentarios', on_delete=models.CASCADE)
+    nombre = models.CharField(max_length=255)
+    cuerpo = models.TextField()
+    fecha = models.DateTimeField(default=datetime.now)
+
+    def __str__(self):
+        return self.post.titulo + ' - ' + str(self.nombre) + ' - ' + str(self.cuerpo)

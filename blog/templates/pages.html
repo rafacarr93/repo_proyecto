@@ -10,7 +10,9 @@
                     <div class="post-preview">
                         <h1>{{post.titulo}}</h1><br>
                         <h3 class="post-subtitle">{{post.subtitulo}}</h3>
-                        <img src="{{post.imagen.url}}" alt="">
+                        {% if post.imagen %}
+                            <img src="{{post.imagen.url}}" alt="">
+                        {% endif %}
                         <p class="post-meta">
                             Subido por
                             <a href="#!">{{post.autor}}</a>
@@ -40,36 +42,24 @@
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <h4 class="subtitle">Comentarios</h4>
-                    {% for comentario in post.comentarios.all %}
-                    <article class="media">
-                        <div class="media-content">
-                            <div class="content">
-                                <p>
-                                    <strong>{{comentario.nombre}}</strong> <small>{% language 'es' %}{{post.fecha}}{% endlanguage %}</small>
-                                    <br>
-                                    {{comentario.cuerpo}}
-                                </p>
-                            </div>
+                    {% if not post.comentarios %}
+                        <div class="notification">
+                            <p class="text-secondary small">Sin comentarios</p>
                         </div>
-                    </article>
-                    {% empty %}
-                    <div class="notification">
-                        <p class="text-secondary small">Sin comentarios</p>
-                    </div>
-                    {% endfor %}
-                    <hr>
-                    <h4 class="subtitle">Agregar comentario</h4>
-                    <form action="" method="POST">
-                        {% csrf_token %}
-                        {{formulario.as_p}}
-                        <div class="field">
-                            <button class="btn btn-light small">Enviar</button>
-                        </div>
-                    </form>
+                    {% else %}
+                        {% for comentario in post.comentarios.all %}
+                            <strong>{{comentario.nombre}}</strong>
+                            <small>{% language 'es' %}{{comentario.fecha}}{% endlanguage %}</small>
+                            <br>
+                            {{comentario.cuerpo}}
+                        {% endfor %}
+                    {% endif %}
+                    <br><br>
+                    <a href="{% url 'comentar' post.pk %}"><button class="btn btn-light small">Agregar comentario</button></a>
+                    <br>
                 </div>
             </div>
         </div>
-    <br>
 {% else %}
 <main class="mb-4">
     <div class="container px-4 px-lg-5">
@@ -84,4 +74,5 @@
     </div>
 </main>
 {% endif %}
+<br>
 {% endblock %}

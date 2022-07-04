@@ -11,6 +11,9 @@
             <div class="post-preview">
                     <h2 class="post-title">{{post.titulo}}</h2>
                     <h3 class="post-subtitle">{{post.subtitulo}}</h3>
+                    {% if post.imagen %}
+                        <img src="{{post.imagen.url}}" alt="">
+                    {% endif %}
                 <p class="post-meta">
                     Subido por
                     <a href="#!">{{post.autor}}</a>

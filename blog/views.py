@@ -2,12 +2,12 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.views import generic
-from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.views import PasswordChangeView
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from .models import Post
-from .forms import FormularioPost, FormularioRegistro, FormularioEditarUsuario
+from .models import Comentario, Post
+from .forms import FormularioPost, FormularioRegistro, FormularioEditarUsuario, FormularioComentario
 
 # Create your views here.
 
@@ -86,4 +86,14 @@ class Editar_usuario(generic.UpdateView):
 
 class Cambiar_password(PasswordChangeView):
     form_class = PasswordChangeForm
+    success_url = reverse_lazy('inicio')
+
+class Agregar_comentario(CreateView):
+    model = Comentario
+    form_class = FormularioComentario
+    template_name = 'agregar_coment.html'
+    def form_valid(self, form):
+        form.instance.post_id = self.kwargs['pk']
+        return super().form_valid(form)
+
     success_url = reverse_lazy('inicio')
